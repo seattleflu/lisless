@@ -1,0 +1,43 @@
+#!/usr/bin/env python3
+"""
+A quick hacky ASTM client to minimally test the Lisless server.
+"""
+from sys import stderr
+from astm.client import Client
+from astm.mapping import (
+    TextField,
+)
+from astm.records import (
+    HeaderRecord,
+    PatientRecord,
+    OrderRecord,
+    ResultRecord,
+    TerminatorRecord,
+)
+
+class Result(ResultRecord):
+    test = TextField()
+    value = TextField()
+
+records = [
+    HeaderRecord(),
+    PatientRecord(),
+    OrderRecord(),
+    Result(test = "FLUA", value = "POSITIVE"),
+    TerminatorRecord(),
+]
+
+def emitter():
+    while record := records.pop(0):
+        if not (yield record):
+            print(f"record not accepted: {record!r}", file = stderr)
+            return
+        else:
+            print(f"sent {record!r}", file = stderr)
+
+Client(
+    host = "localhost",
+    port = 11211,
+    emitter = emitter,
+    flow_map = None,
+).run()

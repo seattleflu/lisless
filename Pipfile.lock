@@ -1,0 +1,29 @@
+{
+    "_meta": {
+        "hash": {
+            "sha256": "557c1e5d9997673c1e3a55ee6d4c8b0df6e2f3c4ef23f8cd8c238bfbfe8a3e76"
+        },
+        "pipfile-spec": 6,
+        "requires": {
+            "python_version": "3.8"
+        },
+        "sources": [
+            {
+                "name": "pypi",
+                "url": "https://pypi.org/simple",
+                "verify_ssl": true
+            }
+        ]
+    },
+    "default": {
+        "astm": {
+            "git": "https://github.com/tsibley/python-astm.git",
+            "ref": "c2fb045100ef1964f1fe6f13730c27a7f1aa14a0"
+        },
+        "lisless": {
+            "editable": true,
+            "path": "."
+        }
+    },
+    "develop": {}
+}
