@@ -7,6 +7,8 @@ import logging
 import os
 import sys
 from .logging import JsonMessageStreamHandler
+from .__version__ import __version__
+
 
 LOG = logging.getLogger(__name__)
 
@@ -41,5 +43,6 @@ class Dispatcher(astm.server.BaseRecordsDispatcher):
 
 class Server(astm.server.Server):
     def __init__(self, *args, port = 11211, dispatcher = Dispatcher, **kwargs):
+        LOG.info(f"Starting Lisless v{__version__}")
         super().__init__(*args, port = port, dispatcher = dispatcher, **kwargs)
         LOG.info("Listening on %s:%d" % self.addr)
